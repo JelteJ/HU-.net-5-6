@@ -16,20 +16,22 @@ namespace WinkelService
 
                 return "Success";
             }
-            return "Dikke fucking stront";
+            return "Inloggen niet gelukt";
         }
 
         public string registreer(string username)
         {
             // Als de user niet bestaat, maak een nieuwe user aan met een gegenereerd wachtwoord
+
+            // Voeg ook tegoed toe aan het account van de klant zodat deze een aantal dingen kan kopen
             string password = Reverse(username);
 
             return password;
         }
 
-        public static string Reverse(string s)
+        public static string Reverse(string username)
         {
-            char[] charArray = s.ToCharArray();
+            char[] charArray = username.ToCharArray();
             Array.Reverse(charArray);
             return new string(charArray);
         }

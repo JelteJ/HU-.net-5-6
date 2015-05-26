@@ -1,0 +1,6 @@
+C:\Users\Jelte\Dropbox\dotNet\WinkelService\WinkelService\obj\Debug\WinkelService.csprojResolveAssemblyReference.cache
+C:\Users\Jelte\Dropbox\dotNet\WinkelService\WinkelService\bin\Debug\WinkelService.dll.config
+C:\Users\Jelte\Dropbox\dotNet\WinkelService\WinkelService\bin\Debug\WinkelService.dll
+C:\Users\Jelte\Dropbox\dotNet\WinkelService\WinkelService\bin\Debug\WinkelService.pdb
+C:\Users\Jelte\Dropbox\dotNet\WinkelService\WinkelService\obj\Debug\WinkelService.dll
+C:\Users\Jelte\Dropbox\dotNet\WinkelService\WinkelService\obj\Debug\WinkelService.pdb

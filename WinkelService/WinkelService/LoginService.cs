@@ -19,10 +19,9 @@ namespace WinkelService
             return "Inloggen niet gelukt";
         }
 
-        public string registreer(string username)
+        public string register(string username)
         {
             // Als de user niet bestaat, maak een nieuwe user aan met een gegenereerd wachtwoord
-
             // Voeg ook tegoed toe aan het account van de klant zodat deze een aantal dingen kan kopen
             string password = Reverse(username);
 

@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Namespace="WinkelDatabaseModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
+        <EntityContainer Name="WinkelDatabaseModelTargetContainer" >
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="WinkelDatabaseModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="WinkelDatabaseModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Customers" EntityType="WinkelDatabaseModel.Customer" />
+          <EntitySet Name="Products" EntityType="WinkelDatabaseModel.Product" />
+          <EntitySet Name="BoughtProducts" EntityType="WinkelDatabaseModel.BoughtProduct" />
+          <AssociationSet Name="CustomerBoughtProduct" Association="WinkelDatabaseModel.CustomerBoughtProduct">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="BoughtProduct" EntitySet="BoughtProducts" />
+          </AssociationSet>
+          <AssociationSet Name="ProductBoughtProduct" Association="WinkelDatabaseModel.ProductBoughtProduct">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="BoughtProduct" EntitySet="BoughtProducts" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" Nullable="false" />
+          <Property Name="password" Type="String" Nullable="false" />
+          <Property Name="balance" Type="String" Nullable="false" />
+          <NavigationProperty Name="BoughtProducts" Relationship="WinkelDatabaseModel.CustomerBoughtProduct" FromRole="Customer" ToRole="BoughtProduct" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" />
+          <Property Name="stock" Type="String" Nullable="false" />
+          <Property Name="price" Type="String" Nullable="false" />
+          <NavigationProperty Name="BoughtProducts" Relationship="WinkelDatabaseModel.ProductBoughtProduct" FromRole="Product" ToRole="BoughtProduct" />
+        </EntityType>
+        <EntityType Name="BoughtProduct">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="amountBought" Type="String" Nullable="false" />
+          <Property Name="dateBought" Type="String" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="WinkelDatabaseModel.CustomerBoughtProduct" FromRole="BoughtProduct" ToRole="Customer" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="WinkelDatabaseModel.ProductBoughtProduct" FromRole="BoughtProduct" ToRole="Product" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="CustomerBoughtProduct">
+          <End Type="WinkelDatabaseModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="WinkelDatabaseModel.BoughtProduct" Role="BoughtProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BoughtProduct">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProductBoughtProduct">
+          <End Type="WinkelDatabaseModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="WinkelDatabaseModel.BoughtProduct" Role="BoughtProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BoughtProduct">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
+        <Alias Key="Model" Value="WinkelDatabaseModel" />
+        <Alias Key="Target" Value="WinkelDatabaseModel.Store" />
+        <EntityContainerMapping CdmEntityContainer="WinkelDatabaseModelContainer" StorageEntityContainer="WinkelDatabaseModelTargetContainer">
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

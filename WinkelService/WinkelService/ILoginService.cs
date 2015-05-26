@@ -13,5 +13,7 @@ namespace WinkelService
     {
         [OperationContract]
         string login(string username, string password);
+
+        string registreer(string username);
     }
 }

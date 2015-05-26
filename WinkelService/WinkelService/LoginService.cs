@@ -18,5 +18,20 @@ namespace WinkelService
             }
             return "Dikke fucking stront";
         }
+
+        public string registreer(string username)
+        {
+            // Als de user niet bestaat, maak een nieuwe user aan met een gegenereerd wachtwoord
+            string password = Reverse(username);
+
+            return password;
+        }
+
+        public static string Reverse(string s)
+        {
+            char[] charArray = s.ToCharArray();
+            Array.Reverse(charArray);
+            return new string(charArray);
+        }
     }
 }

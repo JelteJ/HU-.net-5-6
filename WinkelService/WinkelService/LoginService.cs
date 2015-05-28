@@ -30,11 +30,19 @@ namespace WinkelService
             string pword = Reverse(uname);
             using (WinkelDatabaseModelContainer ctx = new WinkelDatabaseModelContainer())
             {
+                var customers = from cust in ctx.Customers
+                         where cust.username == uname
+                         select cust;
+
+                foreach (Customer p in customers)
+                    return null;
+
                 Customer c = new Customer { username = uname, password = pword, balance = 200 };
                 ctx.Customers.Add(c);
                 ctx.SaveChanges();
+                return pword;
+
             }
-            return pword;
         }
 
         public static string Reverse(string username)

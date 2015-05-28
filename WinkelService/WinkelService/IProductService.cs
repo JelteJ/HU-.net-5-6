@@ -21,7 +21,7 @@ namespace WinkelService
         void addProduct(string name, int stock, int price);
 
         [OperationContract]
-        void getBoughtProducts();
+        List<Product> getBoughtProducts(Customer customerObj);
 
         [OperationContract]
         void getSaldo();

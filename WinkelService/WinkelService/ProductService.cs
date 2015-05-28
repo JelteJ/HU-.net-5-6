@@ -14,8 +14,8 @@ namespace WinkelService
         {
             using (WinkelDatabaseModelContainer ctx = new WinkelDatabaseModelContainer())
             {
-                // return all products where stock > 0
-                return ctx.Products.Where(product => product.stock > 0).ToList();
+               // return all products where stock > 0
+               return ctx.Products.Where(product => product.stock > 0).ToList();
             }
         }
 
@@ -52,10 +52,12 @@ namespace WinkelService
 
         public void getSaldo()
         {
+
         }
 
-        public void getBoughtProducts()
+        public List<Product> getBoughtProducts(Customer customerObj)
         {
+            return null;
         }
 
         public void buyProduct()

@@ -30,7 +30,8 @@ namespace WinkelService
                 // get customer balance
                 Customer customerObj = ctx.Customers.Single(customer => customer.Id == customerId);
 
-                if ((amount * productObj.price) <= customerObj.balance)
+                // check if buyer has enough money
+                if (calculateCostsBuyer(customerId, productId, amount) <= customerObj.balance)
                 {
                     return true;
                 }
@@ -39,13 +40,40 @@ namespace WinkelService
             }
         }
 
-        private void updateStock(int productId, int amount)
+        public void updateStockByProdId(int productId, int amount)
         {
-            using (WinkelDatabaseModelContainer ctx = new WinkelDatabaseModelContainer()) { 
+            using (WinkelDatabaseModelContainer ctx = new WinkelDatabaseModelContainer()) 
+            { 
                 // update product stock 
                 Product productToBuy = ctx.Products.Single(product => product.Id == productId);
                 productToBuy.stock = productToBuy.stock - amount;
                 ctx.SaveChanges();
+            }
+        }
+
+        public void updateBalanceByCustId(int customerId, int productId, int amount)
+        {
+            using (WinkelDatabaseModelContainer ctx = new WinkelDatabaseModelContainer())
+            {
+                // update customer balance 
+                Customer customerWhoWantBuy = ctx.Customers.Single(customer => customer.Id == customerId);
+                customerWhoWantBuy.balance = calculateCostsBuyer(customerId, productId, amount);
+                ctx.SaveChanges();
+            }
+        }
+
+        private int calculateCostsBuyer(int customerId, int productId, int amount) 
+        {
+            using (WinkelDatabaseModelContainer ctx = new WinkelDatabaseModelContainer())
+            {
+                // get product
+                Product productObj = ctx.Products.Single(product => product.Id == productId);   
+
+                // get customer balance
+                Customer customerObj = ctx.Customers.Single(customer => customer.Id == customerId);
+
+                // calculate
+                return amount * productObj.price;
             }
         }
 
@@ -58,10 +86,13 @@ namespace WinkelService
                 if (hashEnoughValue(productId, amount, customerId))
                 {
                     // update product stock 
-                    updateStock(productId, amount);
+                    updateStockByProdId(productId, amount);
 
                     // add to BoughtProducts
                     addBoughtProduct(amount, customerId, productId);
+
+                    // update customer balance
+                    updateBalanceByCustId(customerId, productId, amount);
 
                     return true;
                 }

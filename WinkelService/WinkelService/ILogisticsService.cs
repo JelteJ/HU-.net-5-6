@@ -16,5 +16,11 @@ namespace WinkelService
 
         [OperationContract]
         bool buyProduct(int productId, int amount, int customerId);
+
+        [OperationContract]
+        void updateStockByProdId(int productId, int amount);
+
+        [OperationContract]
+        void updateBalanceByCustId(int customerId, int costs);
     }
 }

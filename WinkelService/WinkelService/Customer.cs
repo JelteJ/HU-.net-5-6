@@ -22,7 +22,7 @@ namespace WinkelService
         public int Id { get; set; }
         public string username { get; set; }
         public string password { get; set; }
-        public string balance { get; set; }
+        public int balance { get; set; }
     
         public virtual ICollection<BoughtProduct> BoughtProducts { get; set; }
     }

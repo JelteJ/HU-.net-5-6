@@ -25,7 +25,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="username" Type="nvarchar(max)" Nullable="false" />
     <Property Name="password" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="balance" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="balance" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Products">
     <Key>
@@ -33,16 +33,16 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="stock" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="price" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="stock" Type="int" Nullable="false" />
+    <Property Name="price" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="BoughtProducts">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="amountBought" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="dateBought" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="amountBought" Type="int" Nullable="false" />
+    <Property Name="dateBought" Type="datetime" Nullable="false" />
     <Property Name="CustomerId" Type="int" Nullable="false" />
     <Property Name="ProductId" Type="int" Nullable="false" />
   </EntityType>
@@ -94,7 +94,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="username" Type="String" Nullable="false" />
           <Property Name="password" Type="String" Nullable="false" />
-          <Property Name="balance" Type="String" Nullable="false" />
+          <Property Name="balance" Type="Int32" Nullable="false" />
           <NavigationProperty Name="BoughtProducts" Relationship="WinkelDatabaseModel.CustomerBoughtProduct" FromRole="Customer" ToRole="BoughtProduct" />
         </EntityType>
         <EntityType Name="Product">
@@ -103,8 +103,8 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" Nullable="false" />
-          <Property Name="stock" Type="String" Nullable="false" />
-          <Property Name="price" Type="String" Nullable="false" />
+          <Property Name="stock" Type="Int32" Nullable="false" />
+          <Property Name="price" Type="Int32" Nullable="false" />
           <NavigationProperty Name="BoughtProducts" Relationship="WinkelDatabaseModel.ProductBoughtProduct" FromRole="Product" ToRole="BoughtProduct" />
         </EntityType>
         <EntityType Name="BoughtProduct">
@@ -112,8 +112,8 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="amountBought" Type="String" Nullable="false" />
-          <Property Name="dateBought" Type="String" Nullable="false" />
+          <Property Name="amountBought" Type="Int32" Nullable="false" />
+          <Property Name="dateBought" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="Customer" Relationship="WinkelDatabaseModel.CustomerBoughtProduct" FromRole="BoughtProduct" ToRole="Customer" />
           <Property Name="CustomerId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Product" Relationship="WinkelDatabaseModel.ProductBoughtProduct" FromRole="BoughtProduct" ToRole="Product" />

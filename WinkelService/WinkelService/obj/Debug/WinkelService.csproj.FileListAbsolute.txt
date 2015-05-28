@@ -10,3 +10,7 @@ C:\Users\Jelte\Documents\GitHub\HU-.net-5-6\WinkelService\WinkelService\bin\Debu
 C:\Users\Jelte\Documents\GitHub\HU-.net-5-6\WinkelService\WinkelService\obj\Debug\WinkelService.csprojResolveAssemblyReference.cache
 C:\Users\Jelte\Documents\GitHub\HU-.net-5-6\WinkelService\WinkelService\obj\Debug\WinkelService.dll
 C:\Users\Jelte\Documents\GitHub\HU-.net-5-6\WinkelService\WinkelService\obj\Debug\WinkelService.pdb
+C:\Users\Jelte\Documents\GitHub\HU-.net-5-6\WinkelService\WinkelService\bin\Debug\EntityFramework.dll
+C:\Users\Jelte\Documents\GitHub\HU-.net-5-6\WinkelService\WinkelService\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Jelte\Documents\GitHub\HU-.net-5-6\WinkelService\WinkelService\bin\Debug\EntityFramework.xml
+C:\Users\Jelte\Documents\GitHub\HU-.net-5-6\WinkelService\WinkelService\bin\Debug\EntityFramework.SqlServer.xml

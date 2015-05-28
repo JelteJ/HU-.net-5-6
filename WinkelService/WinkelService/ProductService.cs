@@ -13,5 +13,17 @@ namespace WinkelService
         public void GetAlleProducten()
         {
         }
+
+        public void getSaldo()
+        {
+        }
+
+        public void getGekochteProducten()
+        {
+        }
+
+        public void KoopProduct()
+        {
+        }
     }
 }

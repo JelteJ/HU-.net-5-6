@@ -21,8 +21,8 @@ namespace WinkelService
     
         public int Id { get; set; }
         public string name { get; set; }
-        public string stock { get; set; }
-        public string price { get; set; }
+        public int stock { get; set; }
+        public int price { get; set; }
     
         public virtual ICollection<BoughtProduct> BoughtProducts { get; set; }
     }

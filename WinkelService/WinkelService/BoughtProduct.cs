@@ -15,8 +15,8 @@ namespace WinkelService
     public partial class BoughtProduct
     {
         public int Id { get; set; }
-        public string amountBought { get; set; }
-        public string dateBought { get; set; }
+        public int amountBought { get; set; }
+        public System.DateTime dateBought { get; set; }
         public int CustomerId { get; set; }
         public int ProductId { get; set; }
     

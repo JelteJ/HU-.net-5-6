@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 05/26/2015 11:52:38
+-- Date Created: 05/28/2015 12:45:41
 -- Generated from EDMX file: C:\Users\Jelte\Documents\GitHub\HU-.net-5-6\WinkelService\WinkelService\WinkelDatabaseModel.edmx
 -- --------------------------------------------------
 
@@ -17,11 +17,26 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[FK_CustomerBoughtProduct]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[BoughtProducts] DROP CONSTRAINT [FK_CustomerBoughtProduct];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ProductBoughtProduct]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[BoughtProducts] DROP CONSTRAINT [FK_ProductBoughtProduct];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[Customers]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Customers];
+GO
+IF OBJECT_ID(N'[dbo].[Products]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Products];
+GO
+IF OBJECT_ID(N'[dbo].[BoughtProducts]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[BoughtProducts];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -32,7 +47,7 @@ CREATE TABLE [dbo].[Customers] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [username] nvarchar(max)  NOT NULL,
     [password] nvarchar(max)  NOT NULL,
-    [balance] nvarchar(max)  NOT NULL
+    [balance] int  NOT NULL
 );
 GO
 
@@ -40,16 +55,16 @@ GO
 CREATE TABLE [dbo].[Products] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [name] nvarchar(max)  NOT NULL,
-    [stock] nvarchar(max)  NOT NULL,
-    [price] nvarchar(max)  NOT NULL
+    [stock] int  NOT NULL,
+    [price] int  NOT NULL
 );
 GO
 
 -- Creating table 'BoughtProducts'
 CREATE TABLE [dbo].[BoughtProducts] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [amountBought] nvarchar(max)  NOT NULL,
-    [dateBought] nvarchar(max)  NOT NULL,
+    [amountBought] int  NOT NULL,
+    [dateBought] datetime  NOT NULL,
     [CustomerId] int  NOT NULL,
     [ProductId] int  NOT NULL
 );

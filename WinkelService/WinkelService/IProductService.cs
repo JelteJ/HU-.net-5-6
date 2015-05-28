@@ -12,13 +12,10 @@ namespace WinkelService
     public interface IProductService
     {
         [OperationContract]
-        void GetAlleProducten();
-
-        [OperationContract]
         void KoopProduct();
 
         [OperationContract]
-        void getGekochteProducten;
+        void getGekochteProducten();
 
         [OperationContract]
         void getSaldo();

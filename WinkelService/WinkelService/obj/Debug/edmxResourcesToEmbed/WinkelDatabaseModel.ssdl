@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="WinkelDatabaseModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="WinkelDatabaseModelStoreContainer">
+    <EntitySet Name="Customers" EntityType="WinkelDatabaseModel.Store.Customers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Products" EntityType="WinkelDatabaseModel.Store.Products" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="BoughtProducts" EntityType="WinkelDatabaseModel.Store.BoughtProducts" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="CustomerBoughtProduct" Association="WinkelDatabaseModel.Store.CustomerBoughtProduct">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="BoughtProduct" EntitySet="BoughtProducts" />
+    </AssociationSet>
+    <AssociationSet Name="ProductBoughtProduct" Association="WinkelDatabaseModel.Store.ProductBoughtProduct">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="BoughtProduct" EntitySet="BoughtProducts" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Customers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="username" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="balance" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Products">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="stock" Type="int" Nullable="false" />
+    <Property Name="price" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BoughtProducts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="amountBought" Type="int" Nullable="false" />
+    <Property Name="dateBought" Type="datetime" Nullable="false" />
+    <Property Name="CustomerId" Type="int" Nullable="false" />
+    <Property Name="ProductId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="CustomerBoughtProduct">
+    <End Role="Customer" Type="WinkelDatabaseModel.Store.Customers" Multiplicity="1" />
+    <End Role="BoughtProduct" Type="WinkelDatabaseModel.Store.BoughtProducts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BoughtProduct">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProductBoughtProduct">
+    <End Role="Product" Type="WinkelDatabaseModel.Store.Products" Multiplicity="1" />
+    <End Role="BoughtProduct" Type="WinkelDatabaseModel.Store.BoughtProducts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BoughtProduct">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

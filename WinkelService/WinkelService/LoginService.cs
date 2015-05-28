@@ -16,23 +16,39 @@ namespace WinkelService
 
                 return "Success";
             }
+
+            using (WinkelDatabaseModelContainer ctx = new WinkelDatabaseModelContainer())
+            {
+               var pass = from customer in ctx.Customers
+                           where customer.username == username
+                           select customer.password;
+            }
             return "Inloggen niet gelukt";
         }
 
-        public string register(string username)
+        public string register(string uname)
         {
             // Als de user niet bestaat, maak een nieuwe user aan met een gegenereerd wachtwoord
             // Voeg ook tegoed toe aan het account van de klant zodat deze een aantal dingen kan kopen
-            string password = Reverse(username);
-
-            return password;
+            string pword = Reverse(uname);
+            using (WinkelDatabaseModelContainer ctx = new WinkelDatabaseModelContainer())
+            {
+                Customer c = new Customer { username = uname, password = pword, balance = 200 };
+                ctx.Customers.Add(c);
+                ctx.SaveChanges();
+            }
+            return pword;
         }
 
         public static string Reverse(string username)
         {
             char[] charArray = username.ToCharArray();
             Array.Reverse(charArray);
+
             return new string(charArray);
         }
+       
+
+
     }
 }

@@ -9,18 +9,9 @@ namespace WinkelService
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IProductService" in both code and config file together.
     [ServiceContract]
-    public interface IProductService
+    public interface IBoughtProductService
     {
         [OperationContract]
-        List<Product> getAllProducts();
-
-        [OperationContract]
-        void buyProduct();
-
-        [OperationContract]
-        void addProduct(string name, int stock, int price);
-
-        [OperationContract]
-        void getSaldo();
+        List<BoughtProduct> getBoughtProducts(int customerId);
     }
 }

@@ -14,8 +14,25 @@ namespace WinkelService
         {
             using (WinkelDatabaseModelContainer ctx = new WinkelDatabaseModelContainer())
             {
+                List<Product> allProducts = new List<Product>();
+
+                foreach(Product product in ctx.Products.Where(product => product.stock > 0).ToList()) {
+                    allProducts.Add(product);
+                }
+
                // return all products where stock > 0
-               return ctx.Products.Where(product => product.stock > 0).ToList();
+                return allProducts;
+            }
+        }
+
+        private Product getProduct(int productId)
+        {
+            using (WinkelDatabaseModelContainer ctx = new WinkelDatabaseModelContainer())
+            {
+                // find product by id
+                Product productObj = ctx.Products.Single(product => product.Id == productId);
+
+                return productObj;
             }
         }
 
@@ -55,13 +72,14 @@ namespace WinkelService
 
         }
 
-        public List<Product> getBoughtProducts(Customer customerObj)
-        {
-            return null;
-        }
+       
 
         public void buyProduct()
         {
+            using (WinkelDatabaseModelContainer ctx = new WinkelDatabaseModelContainer())
+            {
+                
+            }
         }
     }
 }

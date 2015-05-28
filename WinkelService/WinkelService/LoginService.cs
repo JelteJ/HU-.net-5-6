@@ -12,16 +12,13 @@ namespace WinkelService
     {
         public string login(string username, string password)
         {
-            if (username =="jaap" && password == "password123") {
-
-                return "Success";
-            }
-
             using (WinkelDatabaseModelContainer ctx = new WinkelDatabaseModelContainer())
             {
-               var pass = from customer in ctx.Customers
-                           where customer.username == username
-                           select customer.password;
+                Customer p1 = ctx.Customers.Single(p => p.username == username);
+                if (p1.password == password)
+                {
+                    return "Inloggen gelukt";
+                }
             }
             return "Inloggen niet gelukt";
         }

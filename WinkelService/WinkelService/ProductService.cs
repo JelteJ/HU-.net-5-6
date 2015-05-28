@@ -67,18 +67,38 @@ namespace WinkelService
             }
         }
 
-        public void getSaldo()
-        {
-
-        }
-
-       
-
-        public void buyProduct()
+        public void buyProduct(int productId, int amount, int customerId)
         {
             using (WinkelDatabaseModelContainer ctx = new WinkelDatabaseModelContainer())
             {
-                
+                // get product by id
+                Product product = getProduct(productId);
+
+                if (product != null) 
+                {
+                   // update 
+                   
+
+                    p1.Price = p1.Price * 1.08;
+                    ctx.SaveChanges();
+
+                }
+            }
+        }
+
+        public List<BoughtProduct> getBoughtProducts(int customerId)
+        {
+            using (WinkelDatabaseModelContainer ctx = new WinkelDatabaseModelContainer())
+            {
+                List<BoughtProduct> allBoughtProducts = new List<BoughtProduct>();
+
+                foreach (BoughtProduct boughtProduct in ctx.BoughtProducts.Where(product => product.CustomerId == customerId).ToList())
+                {
+                    allBoughtProducts.Add(boughtProduct);
+                }
+
+                // return all BoughtProducts where customerId = 1
+                return allBoughtProducts;
             }
         }
     }

@@ -15,12 +15,12 @@ namespace WinkelService
         List<Product> getAllProducts();
 
         [OperationContract]
-        void buyProduct();
+        void buyProduct(int productId);
 
         [OperationContract]
         void addProduct(string name, int stock, int price);
 
         [OperationContract]
-        void getSaldo();
+        List<BoughtProduct> getBoughtProducts(int customerId);
     }
 }

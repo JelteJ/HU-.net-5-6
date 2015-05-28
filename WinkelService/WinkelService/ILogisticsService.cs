@@ -7,11 +7,14 @@ using System.Text;
 
 namespace WinkelService
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IProductService" in both code and config file together.
+    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "ILoginService" in both code and config file together.
     [ServiceContract]
-    public interface IBoughtProductService
+    public interface ILogisticsService
     {
         [OperationContract]
         List<BoughtProduct> getBoughtProducts(int customerId);
+
+        [OperationContract]
+        bool buyProduct(int productId, int amount, int customerId);
     }
 }

@@ -14,17 +14,22 @@ namespace WinkelService
         {
             using (WinkelDatabaseModelContainer ctx = new WinkelDatabaseModelContainer())
             {
-                var customers = from cust in ctx.Customers
-                                where cust.username == username
-                                select cust;
 
-                foreach (Customer p in customers)
-                    if (p.password == password)
+                try
+                {
+                    Customer p1 = ctx.Customers.Single(p => p.username == username);                
+                    if (p1.password == password)
                     {
                         return "Inloggen gelukt";
                     }
+                }
+                catch
+                {
+                    return "Inloggen niet gelukt";
+                }
             }
             return "Inloggen niet gelukt";
+
         }
 
         public string register(string uname)
@@ -34,18 +39,27 @@ namespace WinkelService
             string pword = Reverse(uname);
             using (WinkelDatabaseModelContainer ctx = new WinkelDatabaseModelContainer())
             {
-                var customers = from cust in ctx.Customers
-                         where cust.username == uname
-                         select cust;
-
-                foreach (Customer p in customers)
-                    return null;
-
-                Customer c = new Customer { username = uname, password = pword, balance = 200 };
-                ctx.Customers.Add(c);
-                ctx.SaveChanges();
-                return pword;
+                Customer p1 = null;
+                try
+                {
+                    p1 = ctx.Customers.Single(p => p.username == uname);
+                }
+                catch
+                {
+                    if (p1 == null)
+                    {
+                        Customer c = new Customer { username = uname, password = pword, balance = 200 };
+                        ctx.Customers.Add(c);
+                        ctx.SaveChanges();
+                        return pword;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
             }
+            return null;
         }
 
         public static string Reverse(string username)

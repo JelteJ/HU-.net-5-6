@@ -36,9 +36,19 @@ namespace WinkelService
             using (WinkelDatabaseModelContainer ctx = new WinkelDatabaseModelContainer())
             {
                 // find product by id
-                Product productObj = ctx.Products.Single(product => product.Id == productId);
+                var findProduct = ctx.Products.Single(product => product.Id == productId);
 
-                return productObj;
+                // create new object
+                Product productObj = new Product
+                {
+                    Id = findProduct.Id,
+                    name = findProduct.name,
+                    stock = findProduct.stock,
+                    price = findProduct.price
+                };
+                
+                // return product object
+               return productObj;
             }
         }
 

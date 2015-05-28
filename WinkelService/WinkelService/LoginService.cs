@@ -14,11 +14,15 @@ namespace WinkelService
         {
             using (WinkelDatabaseModelContainer ctx = new WinkelDatabaseModelContainer())
             {
-                Customer p1 = ctx.Customers.Single(p => p.username == username);
-                if (p1.password == password)
-                {
-                    return "Inloggen gelukt";
-                }
+                var customers = from cust in ctx.Customers
+                                where cust.username == username
+                                select cust;
+
+                foreach (Customer p in customers)
+                    if (p.password == password)
+                    {
+                        return "Inloggen gelukt";
+                    }
             }
             return "Inloggen niet gelukt";
         }
@@ -41,7 +45,6 @@ namespace WinkelService
                 ctx.Customers.Add(c);
                 ctx.SaveChanges();
                 return pword;
-
             }
         }
 

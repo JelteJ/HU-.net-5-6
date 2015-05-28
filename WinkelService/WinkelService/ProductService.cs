@@ -57,6 +57,7 @@ namespace WinkelService
                     price = price
                 };
 
+                // add and save
                 ctx.Products.Add(nweProduct);
                 ctx.SaveChanges();
             }

@@ -83,6 +83,7 @@ namespace WinkelService
                     ProductId = productId
                 };
 
+                // add and save
                 ctx.BoughtProducts.Add(nweBoughtProduct);
                 ctx.SaveChanges();
             }

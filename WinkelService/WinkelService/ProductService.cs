@@ -27,7 +27,7 @@ namespace WinkelService
                 }
                 
                 // return list of all products
-                return ctx.Products.ToList();
+                return allProducts;
             }
         }
 

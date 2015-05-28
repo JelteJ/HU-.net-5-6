@@ -88,7 +88,7 @@ namespace WinkelService
             }
         }
 
-        public List<BoughtProduct> getBoughtProducts(int customerId)
+        public List<BoughtProduct> getBoughtProductsByCustId(int customerId)
         {
             using (WinkelDatabaseModelContainer ctx = new WinkelDatabaseModelContainer())
             {

@@ -12,7 +12,7 @@ namespace WinkelService
     public interface ILogisticsService
     {
         [OperationContract]
-        List<BoughtProduct> getBoughtProducts(int customerId);
+        List<BoughtProduct> getBoughtProductsByCustId(int customerId);
 
         [OperationContract]
         bool buyProduct(int productId, int amount, int customerId);

@@ -25,7 +25,7 @@ namespace WinkelService
             }
         }
 
-        private Product getProductById(int productId)
+        public Product getProductById(int productId)
         {
             using (WinkelDatabaseModelContainer ctx = new WinkelDatabaseModelContainer())
             {

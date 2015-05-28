@@ -21,6 +21,6 @@ namespace WinkelService
         void updateStockByProdId(int productId, int amount);
 
         [OperationContract]
-        void updateBalanceByCustId(int customerId, int costs);
+        void updateBalanceByCustId(int customerId, int productId, int amount);
     }
 }

@@ -16,12 +16,18 @@ namespace WinkelService
             {
                 List<Product> allProducts = new List<Product>();
 
-                foreach(Product product in ctx.Products.Where(product => product.stock > 0).ToList()) {
-                    allProducts.Add(product);
+                // get all products where stock is greater than 0
+                foreach (Product product in ctx.Products.Where(product => product.stock > 0).ToList()) {
+                    allProducts.Add(new Product {
+                        Id = product.Id,
+                        name = product.name,
+                        stock = product.stock,
+                        price = product.price
+                    });
                 }
-
-               // return all products where stock > 0
-                return allProducts;
+                
+                // return list of all products
+                return ctx.Products.ToList();
             }
         }
 

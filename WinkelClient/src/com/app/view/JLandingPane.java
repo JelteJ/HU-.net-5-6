@@ -22,7 +22,9 @@ public class JLandingPane {
 	private JPanel contentPanel;
 	
 	private JLogin loginPanel;
-	private JRegister registerPanel;;
+	private JProduct productPanel;
+	private JInventory inventoryPanel;
+	private JRegister registerPanel;
 	
 	/**
 	 * Launch the application.
@@ -113,6 +115,40 @@ public class JLandingPane {
 		item_register.setRolloverEnabled(true);
 		item_register.setIcon(new ImageIcon(JLandingPane.class.getResource("/images/lock_icon.png")));
 		menuBar_register.add(item_register);
+		
+		JMenuBar menuBar_products = new JMenuBar();
+		menuBar_products.setBounds(0, 80, 219, 40);
+		desktopPanel.add(menuBar_products);
+		
+		JMenuItem item_product = new JMenuItem();
+		item_product.setHorizontalAlignment(SwingConstants.LEFT);
+		item_product.setText("Product");
+		item_product.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				productPanel = new JProduct();
+				cardPannel(productPanel);
+			}
+		});
+		item_product.setRolloverEnabled(true);
+		item_product.setIcon(new ImageIcon(JLandingPane.class.getResource("/images/lock_icon.png")));
+		menuBar_products.add(item_product);
+		
+		JMenuBar menuBar_inventory = new JMenuBar();
+		menuBar_inventory.setBounds(0, 120, 219, 40);
+		desktopPanel.add(menuBar_inventory);
+		
+		JMenuItem item_inventory = new JMenuItem();
+		item_inventory.setHorizontalAlignment(SwingConstants.LEFT);
+		item_inventory.setText("Inventory");
+		item_inventory.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				inventoryPanel = new JInventory();
+				cardPannel(inventoryPanel);
+			}
+		});
+		item_inventory.setRolloverEnabled(true);
+		item_inventory.setIcon(new ImageIcon(JLandingPane.class.getResource("/images/lock_icon.png")));
+		menuBar_inventory.add(item_inventory);
 		
 		contentPanel = new JPanel();
 		contentPanel.setBackground(UIManager.getColor("Desktop.background"));

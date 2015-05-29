@@ -6,6 +6,11 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.app.connector.Connector;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 @SuppressWarnings("serial")
 public class JRegister extends JPanel {
 
@@ -24,15 +29,33 @@ public class JRegister extends JPanel {
 		lblAddAccountInformation.setBounds(95, 19, 210, 16);
 		add(lblAddAccountInformation);
 		
-		TextField textField_username = new TextField();
+		final TextField textField_username = new TextField();
 		textField_username.setBounds(119, 97, 186, 22);
 		add(textField_username);
 		
-		JLabel label_newPassword = new JLabel("");
+		final JLabel label_newPassword = new JLabel("");
 		label_newPassword.setBounds(170, 133, 237, 16);
 		add(label_newPassword);
 		
 		JButton btnRegister = new JButton("Register");
+		btnRegister.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if(!textField_username.getText().isEmpty()) {
+					
+					String password = Connector.getLoginServiceInterface().register(textField_username.getText());
+				
+					// check if i retrieve a password
+					if (!password.isEmpty()) {
+						label_newPassword.setText(password);
+					} else {
+						label_newPassword.setText("Register failed!");
+					}
+				} else {
+					label_newPassword.setText("Field is not filled!");
+				}
+			}
+		});
 		btnRegister.setBounds(192, 217, 117, 29);
 		add(btnRegister);
 	}

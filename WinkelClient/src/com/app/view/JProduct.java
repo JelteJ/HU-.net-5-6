@@ -1,68 +1,68 @@
 package com.app.view;
 
-import java.awt.TextField;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.Component;
+import java.awt.Font;
+import java.awt.SystemColor;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.List;
 
-import javax.swing.JButton;
+import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.ListSelectionModel;
+
+import org.datacontract.schemas._2004._07.winkelservice.Product;
 
 import com.app.connector.Connector;
+
 
 @SuppressWarnings("serial")
 public class JProduct extends JPanel {
 
+	private JPanel productPanel;
+//	private static DefaultListModel<String> listModel = new DefaultListModel<String>();
+//	
+//	public static void addElementsToList() {
+//		
+//		List<Product> productsList = Connector.getProductServiceInterface().getAllProducts().getProduct(); 
+//		
+//		if (productsList.size() > 0) {
+//			for (Product product : productsList) {
+//				listModel.addElement(product.getName() + "  -  " + product.getPrice() + "  -  " + product.getStock());
+//			}
+//		}
+//	}
+	
 	public JProduct() {
 		setLayout(null);
 		
-		JLabel label_pass = new JLabel("Password:");
-		label_pass.setBounds(28, 133, 92, 16);
-		add(label_pass);
+		JLabel lblSdsdsdsdsd = new JLabel("sdsdsdsdsd");
+		lblSdsdsdsdsd.setBounds(203, 126, 61, 16);
+		add(lblSdsdsdsdsd);
 		
-		JLabel lblUsername = new JLabel("Username:");
-		lblUsername.setBounds(28, 97, 92, 16);
-		add(lblUsername);
+//		JLabel lblProducten = new JLabel("Producten");
+//		lblProducten.setAlignmentX(Component.CENTER_ALIGNMENT);
+//		lblProducten.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+//		lblProducten.setBounds(167, 211, 153, -79);
+//		productPanel.add(lblProducten);
 		
-		JLabel lblAddAccountInformation = new JLabel("Add account information");
-		lblAddAccountInformation.setBounds(95, 19, 210, 16);
-		add(lblAddAccountInformation);
+//		final JList<String> productList = new JList<String>(listModel);
+//		productList.setBackground(SystemColor.window);
+//		productList.addMouseListener(new MouseAdapter() {
+//			public void mouseClicked(MouseEvent e) {
+//				String selected = productList.getSelectedValue().toString();
+//				
+//				System.out.println(selected);
+//			}
+//		});
+//		productList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+//		productList.setToolTipText("Selecteer product");
+//		productList.setBounds(119, 97, 186, 22);
+//		productPanel.add(productList);
+//		
 		
-		final TextField textField_username = new TextField();
-		textField_username.setBounds(119, 97, 186, 22);
-		add(textField_username);
 		
-		final TextField textField_password = new TextField();
-		textField_password.setBounds(119, 130, 186, 22);
-		add(textField_password);
-		
-		final JLabel label_error = new JLabel("");
-		label_error.setBounds(119, 168, 186, 16);
-		add(label_error);
-		
-		JButton button_login = new JButton("Login");
-		button_login.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				if(!textField_username.getText().isEmpty() && !textField_password.getText().isEmpty()) {
-					// login by client
-					boolean login = Connector.getLoginServiceInterface().login(textField_username.getText(), textField_password.getText());
-					
-					// check if login succesfully
-					if (login) {
-						// open new shizzle
-						
-						label_error.setText("Login succes!");
-						
-					} else {
-						label_error.setText("Login failed!");
-					}
-				} else {
-					label_error.setText("Fields are not filled!");
-				}
-			}
-		});
-		button_login.setBounds(192, 217, 117, 29);
-		add(button_login);
 	}
 }

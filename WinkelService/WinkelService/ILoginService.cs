@@ -12,7 +12,7 @@ namespace WinkelService
     public interface ILoginService
     {
         [OperationContract]
-        string login(string username, string password);
+        Boolean login(string username, string password);
 
         [OperationContract]
         string register(string username);

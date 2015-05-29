@@ -12,15 +12,14 @@ namespace WinkelService
     public interface ILogisticsService
     {
         [OperationContract]
-        List<BoughtProduct> getBoughtProductsByCustId(int customerId);
+        List<BoughtProduct> getBoughtProducts(string username, string password);
 
         [OperationContract]
-        bool buyProduct(int productId, int amount, int customerId);
+        bool buyProduct(int productId, int amount, string username, string password);
 
         [OperationContract]
         void updateStockByProdId(int productId, int amount);
 
-        [OperationContract]
-        void updateBalanceByCustId(int customerId, int productId, int amount);
+        void updateBalanceByCustId(int productId, int amount, int customerId);
     }
 }

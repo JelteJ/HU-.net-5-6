@@ -10,7 +10,7 @@ namespace WinkelService
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "LoginService" in both code and config file together.
     public class LoginService : ILoginService
     {
-        public string login(string username, string password)
+        public Boolean login(string username, string password)
         {
             using (WinkelDatabaseModelContainer ctx = new WinkelDatabaseModelContainer())
             {
@@ -20,15 +20,15 @@ namespace WinkelService
                     Customer p1 = ctx.Customers.Single(p => p.username == username);                
                     if (p1.password == password)
                     {
-                        return "Inloggen gelukt";
+                        return true;
                     }
                 }
                 catch
                 {
-                    return "Inloggen niet gelukt";
+                    return false;
                 }
             }
-            return "Inloggen niet gelukt";
+            return false;
 
         }
 

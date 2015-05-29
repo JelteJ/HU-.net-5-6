@@ -51,7 +51,7 @@ namespace WinkelService
             }
         }
 
-        public void updateBalanceByCustId(int customerId, int productId, int amount)
+        public void updateBalanceByCustId(int productId, int amount,int customerId)
         {
             using (WinkelDatabaseModelContainer ctx = new WinkelDatabaseModelContainer())
             {
@@ -77,24 +77,31 @@ namespace WinkelService
             }
         }
 
-        public bool buyProduct(int productId, int amount, int customerId)
-        {
-            // check stock 
-            if (isStockGreaterThanAmount(productId, amount))
+        public bool buyProduct(int productId, int amount, string username, string password)
+        { 
+            LoginService l = new LoginService();
+            if (l.login(username, password))
             {
-                // check scustomer balance
-                if (hashEnoughValue(productId, amount, customerId))
+                int customerId = getCustIdByUsername(username);
+                
+                // check stock 
+                if (isStockGreaterThanAmount(productId, amount))
                 {
-                    // update product stock 
-                    updateStockByProdId(productId, amount);
+                    // check scustomer balance
+                    if (hashEnoughValue(productId, amount, customerId))
+                    {
+                        // update product stock 
+                        updateStockByProdId(productId, amount);
 
-                    // add to BoughtProducts
-                    addBoughtProduct(amount, customerId, productId);
+                        // add to BoughtProducts
+                        addBoughtProduct(amount, customerId, productId);
 
-                    // update customer balance
-                    updateBalanceByCustId(customerId, productId, amount);
+                        // update customer balance
+                        updateBalanceByCustId(productId, amount, customerId);
 
-                    return true;
+                        return true;
+                    }
+                    return false;
                 }
                 return false;
             }
@@ -120,20 +127,31 @@ namespace WinkelService
             }
         }
 
-        public List<BoughtProduct> getBoughtProductsByCustId(int customerId)
+        public int getCustIdByUsername(string username)
         {
             using (WinkelDatabaseModelContainer ctx = new WinkelDatabaseModelContainer())
             {
-                List<BoughtProduct> allBoughtProducts = new List<BoughtProduct>();
-
-                foreach (BoughtProduct boughtProduct in ctx.BoughtProducts.Where(product => product.CustomerId == customerId).ToList())
-                {
-                    allBoughtProducts.Add(boughtProduct);
-                }
-
-                // return all BoughtProducts where customerId = 1
-                return allBoughtProducts;
+                return ctx.Customers.Single(p => p.username == username).Id;
             }
+        }
+
+        public List<BoughtProduct> getBoughtProducts(string username, string password)
+        {
+
+            List<BoughtProduct> allBoughtProducts = new List<BoughtProduct>();
+            LoginService l = new LoginService();
+            if (l.login(username,password)) {
+                using (WinkelDatabaseModelContainer ctx = new WinkelDatabaseModelContainer())
+                {
+                    int customerId = getCustIdByUsername(username);
+
+                    foreach (BoughtProduct boughtProduct in ctx.BoughtProducts.Where(product => product.CustomerId == customerId).ToList())
+                    {
+                        allBoughtProducts.Add(new BoughtProduct { amountBought = boughtProduct.amountBought , CustomerId = boughtProduct.CustomerId, dateBought = boughtProduct.dateBought, Id = boughtProduct.Id, ProductId = boughtProduct.ProductId });
+                    }
+                }
+            }
+            return allBoughtProducts;
         }
     }
 }

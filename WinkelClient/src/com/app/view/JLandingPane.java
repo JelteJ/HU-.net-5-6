@@ -13,18 +13,23 @@ import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.UIManager;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 
 public class JLandingPane {
 
 	private JFrame frame;
-	private JPanel contentPanel;
+	private static JPanel contentPanel;
 	
 	private JLogin loginPanel;
 	private JProduct productPanel;
 	private JInventory inventoryPanel;
 	private JRegister registerPanel;
+	
+	private static JMenuItem item_login;
+	private static JMenuItem item_register;
+	private static JMenuItem item_product;
+	private static JMenuItem item_inventory;
 	
 	/**
 	 * Launch the application.
@@ -47,9 +52,20 @@ public class JLandingPane {
 	 */
 	public JLandingPane() {
 		initialize();
+		setMenuBarsVisible(false);
 	}
 	
-	private void cardPannel(JPanel addPanel) {
+	public static void setMenuBarsVisible(boolean enableMenuItem) {
+		// when logged in enableMenuItem will be true
+		if (enableMenuItem) {
+			item_login.setEnabled(false);
+			item_register.setEnabled(false);
+			item_product.setEnabled(true);
+			item_inventory.setEnabled(true);
+		} 
+	}
+	
+	public static void cardPannel(JPanel addPanel) {
 		// removing old pannel
 		contentPanel.removeAll();
 		contentPanel.repaint();
@@ -85,7 +101,7 @@ public class JLandingPane {
 		menuBar_login.setBounds(0, 0, 219, 40);
 		desktopPanel.add(menuBar_login);
 		
-		JMenuItem item_login = new JMenuItem();
+		item_login = new JMenuItem();
 		item_login.setHorizontalAlignment(SwingConstants.LEFT);
 		item_login.setSelected(true);
 		item_login.setText("Login");
@@ -103,7 +119,7 @@ public class JLandingPane {
 		menuBar_register.setBounds(0, 40, 219, 40);
 		desktopPanel.add(menuBar_register);
 		
-		JMenuItem item_register = new JMenuItem();
+		item_register = new JMenuItem();
 		item_register.setHorizontalAlignment(SwingConstants.LEFT);
 		item_register.setText("Register");
 		item_register.addActionListener(new ActionListener() {
@@ -120,7 +136,8 @@ public class JLandingPane {
 		menuBar_products.setBounds(0, 80, 219, 40);
 		desktopPanel.add(menuBar_products);
 		
-		JMenuItem item_product = new JMenuItem();
+		item_product = new JMenuItem();
+		item_product.setEnabled(false);
 		item_product.setHorizontalAlignment(SwingConstants.LEFT);
 		item_product.setText("Product");
 		item_product.addActionListener(new ActionListener() {
@@ -137,7 +154,8 @@ public class JLandingPane {
 		menuBar_inventory.setBounds(0, 120, 219, 40);
 		desktopPanel.add(menuBar_inventory);
 		
-		JMenuItem item_inventory = new JMenuItem();
+		item_inventory = new JMenuItem();
+		item_inventory.setEnabled(false);
 		item_inventory.setHorizontalAlignment(SwingConstants.LEFT);
 		item_inventory.setText("Inventory");
 		item_inventory.addActionListener(new ActionListener() {

@@ -50,10 +50,10 @@ public class JLogin extends JPanel {
 					
 					// check if login succesfully
 					if (login) {
-						// open new shizzle
-						
-						label_error.setText("Login succes!");
-						
+						// open new panel
+						JProduct productPanel = new JProduct();
+						JLandingPane.setMenuBarsVisible(true);
+						JLandingPane.cardPannel(productPanel);
 					} else {
 						label_error.setText("Login failed!");
 					}

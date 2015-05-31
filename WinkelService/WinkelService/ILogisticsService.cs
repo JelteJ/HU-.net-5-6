@@ -15,6 +15,9 @@ namespace WinkelService
         List<BoughtProduct> getBoughtProducts(string username, string password);
 
         [OperationContract]
+        int getBalance(string username, string password);
+
+        [OperationContract]
         bool buyProduct(int productId, int amount, string username, string password);
 
         [OperationContract]

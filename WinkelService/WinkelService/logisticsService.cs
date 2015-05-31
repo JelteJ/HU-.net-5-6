@@ -78,9 +78,9 @@ namespace WinkelService
         }
 
         public bool buyProduct(int productId, int amount, string username, string password)
-        { 
-            LoginService l = new LoginService();
-            if (l.login(username, password))
+        {
+            LoginService logInService = new LoginService();
+            if (logInService.login(username, password))
             {
                 int customerId = getCustIdByUsername(username);
                 
@@ -135,12 +135,30 @@ namespace WinkelService
             }
         }
 
+        public int getBalance(string username, string password)
+        {
+            LoginService loginService = new LoginService();
+            if (loginService.login(username, password))
+            {
+                using (WinkelDatabaseModelContainer ctx = new WinkelDatabaseModelContainer())
+                {
+                    // get balance
+                    int customerId = getCustIdByUsername(username);
+                    Customer customerObj = ctx.Customers.Single(customer => customer.Id == customerId);
+
+                    return customerObj.balance;
+                }
+            }
+            return 0;
+        }
+
         public List<BoughtProduct> getBoughtProducts(string username, string password)
         {
 
             List<BoughtProduct> allBoughtProducts = new List<BoughtProduct>();
-            LoginService l = new LoginService();
-            if (l.login(username,password)) {
+            LoginService loginService = new LoginService();
+            if (loginService.login(username, password))
+            {
                 using (WinkelDatabaseModelContainer ctx = new WinkelDatabaseModelContainer())
                 {
                     int customerId = getCustIdByUsername(username);

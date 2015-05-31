@@ -50,6 +50,10 @@ public class JLogin extends JPanel {
 					
 					// check if login succesfully
 					if (login) {
+						
+						JLandingPane.setPass(textField_password.getText());
+						JLandingPane.setUs(textField_username.getText());
+						
 						// open new panel
 						JProduct productPanel = new JProduct();
 						JLandingPane.setMenuBarsVisible(true);

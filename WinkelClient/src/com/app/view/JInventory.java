@@ -1,68 +1,56 @@
 package com.app.view;
 
-import java.awt.TextField;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.Component;
+import java.awt.Font;
+import java.awt.SystemColor;
 
-import javax.swing.JButton;
+import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
+
+import org.datacontract.schemas._2004._07.winkelservice.BoughtProduct;
+import org.datacontract.schemas._2004._07.winkelservice.Product;
 
 import com.app.connector.Connector;
 
 @SuppressWarnings("serial")
 public class JInventory extends JPanel {
-
+	
+	private JLabel lblMonyLeft;
+	private DefaultListModel<String> model = new DefaultListModel<String>();
+	
 	public JInventory() {
 		setLayout(null);
 		
-		JLabel label_pass = new JLabel("Password:");
-		label_pass.setBounds(28, 133, 92, 16);
-		add(label_pass);
+		JLabel lblProductOverview = new JLabel("Product inventory");
+		lblProductOverview.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblProductOverview.setBounds(207, 11, 135, 16);
+		add(lblProductOverview);
 		
-		JLabel lblUsername = new JLabel("Username:");
-		lblUsername.setBounds(28, 97, 92, 16);
-		add(lblUsername);
+		JLabel lblProducten = new JLabel("Producten");
+		lblProducten.setAlignmentX(Component.CENTER_ALIGNMENT);
+		lblProducten.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblProducten.setBounds(10, 211, 310, -174);
+		add(lblProducten);
 		
-		JLabel lblAddAccountInformation = new JLabel("Add account information");
-		lblAddAccountInformation.setBounds(95, 19, 210, 16);
-		add(lblAddAccountInformation);
+		// add products onload
+		for (BoughtProduct b : Connector.getLogisticsServiceInterface().getBoughtProducts(JLandingPane.getUs(), JLandingPane.getPass()).getBoughtProduct()) {
+			Product product = Connector.getProductServiceInterface().getProductById(b.getProductId());
+			model.addElement(product.getName() + ", €" + product.getPrice() + ", op " + b.getDateBought().getDay() + "-" + b.getDateBought().getMonth() + "-" + b.getDateBought().getYear());
+		}
 		
-		final TextField textField_username = new TextField();
-		textField_username.setBounds(119, 97, 186, 22);
-		add(textField_username);
+		final JList<String> productList = new JList<String>(model);
 		
-		final TextField textField_password = new TextField();
-		textField_password.setBounds(119, 130, 186, 22);
-		add(textField_password);
+		productList.setBackground(SystemColor.window);
+		productList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		productList.setBounds(13, 38, 329, 197);
+		add(productList);
 		
-		final JLabel label_error = new JLabel("");
-		label_error.setBounds(119, 168, 186, 16);
-		add(label_error);
-		
-		JButton button_login = new JButton("Login");
-		button_login.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				if(!textField_username.getText().isEmpty() && !textField_password.getText().isEmpty()) {
-					// login by client
-					boolean login = Connector.getLoginServiceInterface().login(textField_username.getText(), textField_password.getText());
-					
-					// check if login succesfully
-					if (login) {
-						// open new shizzle
-						
-						label_error.setText("Login succes!");
-						
-					} else {
-						label_error.setText("Login failed!");
-					}
-				} else {
-					label_error.setText("Fields are not filled!");
-				}
-			}
-		});
-		button_login.setBounds(192, 217, 117, 29);
-		add(button_login);
+		lblMonyLeft = new JLabel("Money left:");// + Connector.getLogisticsServiceInterface().getBalance());
+		lblMonyLeft.setBounds(10, 12, 165, 14);
+		add(lblMonyLeft);
 	}
 }

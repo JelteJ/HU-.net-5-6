@@ -31,6 +31,13 @@ public class JLandingPane {
 	private static JMenuItem item_product;
 	private static JMenuItem item_inventory;
 	
+	// mag eigenlijk niet :p
+	private static String pass, us;
+	public static String getPass() {return pass;}
+	public static String getUs() {return us;}
+	public static void setPass(String usPass) {pass = usPass;}
+	public static void setUs(String usUs) {us = usUs;}
+	
 	/**
 	 * Launch the application.
 	 */

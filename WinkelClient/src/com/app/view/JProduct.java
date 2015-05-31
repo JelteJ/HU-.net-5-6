@@ -15,9 +15,11 @@ import javax.swing.ListSelectionModel;
 import org.datacontract.schemas._2004._07.winkelservice.Product;
 
 import com.app.connector.Connector;
+import com.app.helper.MessageBox;
 
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -31,7 +33,7 @@ public class JProduct extends JPanel {
 		model.clear();
 		
 		for (Product p : Connector.getProductServiceInterface().getAllProducts().getProduct()) {
-			model.addElement(p.getName() + ", €" + p.getPrice() + ", Stock:" + p.getStock());
+			model.addElement("ID: " + p.getId() + " || " + p.getName() + ", €" + p.getPrice() + ", Stock:" + p.getStock());
 		}
 	}
 	
@@ -57,9 +59,29 @@ public class JProduct extends JPanel {
 		productList.setBackground(SystemColor.window);
 		productList.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				String selected = productList.getSelectedValue().toString();
+				// show question
+				int choise = MessageBox.showOkOrCancel("Do you realy want to buy this product?" , "Buy product");
 				
-				System.out.println(selected);
+				// yes, i want to buy
+				if (choise == 0) {
+					String selected = productList.getSelectedValue().toString();
+					String[] details = selected.split(" ");
+					
+					try {
+						int productId = Integer.parseInt(details[0]);
+						
+						// buy product
+						if (Connector.getLogisticsServiceInterface().buyProduct(productId, 1, JLandingPane.getUs(), JLandingPane.getPass())) {
+							// succes
+							MessageBox.showSuccess("You bought the product!", "Successfully bought");
+						} else {
+							// oops 
+							MessageBox.showError("You didn't bought the product! Check your saldo and try again.", "Unsuccessful bought!");
+						}
+					} catch (NumberFormatException exception) {
+						System.err.println(exception);
+					}
+				}
 			}
 		});
 		productList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

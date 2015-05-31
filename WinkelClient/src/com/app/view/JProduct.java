@@ -38,30 +38,37 @@ public class JProduct extends JPanel {
 	public JProduct() {
 		setLayout(null);
 		
-		JLabel lblSdsdsdsdsd = new JLabel("sdsdsdsdsd");
-		lblSdsdsdsdsd.setBounds(203, 126, 61, 16);
-		add(lblSdsdsdsdsd);
+		JLabel label_alleProducten = new JLabel("Alle producten");
+		label_alleProducten.setBounds(237, 11, 83, 16);
+		add(label_alleProducten);
 		
-//		JLabel lblProducten = new JLabel("Producten");
-//		lblProducten.setAlignmentX(Component.CENTER_ALIGNMENT);
-//		lblProducten.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-//		lblProducten.setBounds(167, 211, 153, -79);
-//		productPanel.add(lblProducten);
+		JLabel lblProducten = new JLabel("Producten");
+		lblProducten.setAlignmentX(Component.CENTER_ALIGNMENT);
+		lblProducten.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
+		lblProducten.setBounds(167, 211, 153, -79);
+		add(lblProducten);
 		
-//		final JList<String> productList = new JList<String>(listModel);
-//		productList.setBackground(SystemColor.window);
-//		productList.addMouseListener(new MouseAdapter() {
-//			public void mouseClicked(MouseEvent e) {
-//				String selected = productList.getSelectedValue().toString();
-//				
-//				System.out.println(selected);
-//			}
-//		});
-//		productList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-//		productList.setToolTipText("Selecteer product");
-//		productList.setBounds(119, 97, 186, 22);
-//		productPanel.add(productList);
-//		
+		DefaultListModel<String> model = new DefaultListModel<String>();
+		
+		final JList<String> productList = new JList<String>(model);
+		
+		for (Product p : Connector.getProductServiceInterface().getAllProducts().getProduct()) {
+			model.addElement(p.getName() + ", €" + p.getPrice() + ", Stock:" + p.getStock());
+		}
+		
+		productList.setBackground(SystemColor.window);
+		productList.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				String selected = productList.getSelectedValue().toString();
+				
+				System.out.println(selected);
+			}
+		});
+		productList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		productList.setToolTipText("Selecteer product");
+		productList.setBounds(13, 38, 307, 226);
+		add(productList);
+		
 		
 		
 	}

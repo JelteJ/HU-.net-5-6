@@ -15,12 +15,25 @@ import javax.swing.ListSelectionModel;
 import org.datacontract.schemas._2004._07.winkelservice.Product;
 
 import com.app.connector.Connector;
+
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
+@SuppressWarnings("serial")
 public class JProduct extends JPanel {
 	
 	private JLabel label_balance;
+	private DefaultListModel<String> model = new DefaultListModel<String>();
+	
+	private void addProducts() {
+		model.clear();
+		
+		for (Product p : Connector.getProductServiceInterface().getAllProducts().getProduct()) {
+			model.addElement(p.getName() + ", €" + p.getPrice() + ", Stock:" + p.getStock());
+		}
+	}
 	
 	public JProduct() {
 		setLayout(null);
@@ -36,20 +49,15 @@ public class JProduct extends JPanel {
 		lblProducten.setBounds(10, 211, 310, -174);
 		add(lblProducten);
 		
-		DefaultListModel<String> model = new DefaultListModel<String>();
+		// add products onload
+		addProducts();
 		
 		final JList<String> productList = new JList<String>(model);
-		
-		for (Product p : Connector.getProductServiceInterface().getAllProducts().getProduct()) {
-			model.addElement(p.getName() + ", €" + p.getPrice() + ", Stock:" + p.getStock());
-		}
 		
 		productList.setBackground(SystemColor.window);
 		productList.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				String selected = productList.getSelectedValue().toString();
-				
-				
 				
 				System.out.println(selected);
 			}
@@ -60,10 +68,15 @@ public class JProduct extends JPanel {
 		add(productList);
 		
 		JButton btnReload = new JButton("Reload");
+		btnReload.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				addProducts();
+			}
+		});
 		btnReload.setBounds(253, 244, 89, 23);
 		add(btnReload);
 		
-		label_balance = new JLabel("My balance: " + Connector.getLogisticsServiceInterface().getBalance());
+		label_balance = new JLabel("My balance: ");// + Connector.getLogisticsServiceInterface().getBalance());
 		label_balance.setBounds(10, 12, 165, 14);
 		add(label_balance);
 		

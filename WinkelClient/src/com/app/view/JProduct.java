@@ -75,8 +75,11 @@ public class JProduct extends JPanel {
 							// succes
 							MessageBox.showSuccess("You bought the product!", "Successfully bought");
 							
+							// creat new list
+							addProducts();
+							
 							// set new balance
-							label_balance = new JLabel("My balance: \u20ac" + Connector.getLogisticsServiceInterface().getBalance(JLandingPane.getUs(), JLandingPane.getPass()));
+							label_balance.setText("My balance: \u20ac" + Connector.getLogisticsServiceInterface().getBalance(JLandingPane.getUs(), JLandingPane.getPass()));
 						} else {
 							// oops 
 							MessageBox.showError("You didn't bought the product! Check your saldo and try again.", "Unsuccessful bought!");

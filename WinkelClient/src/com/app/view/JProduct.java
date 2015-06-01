@@ -74,6 +74,9 @@ public class JProduct extends JPanel {
 						if (Connector.getLogisticsServiceInterface().buyProduct(productId, 1, JLandingPane.getUs(), JLandingPane.getPass())) {
 							// succes
 							MessageBox.showSuccess("You bought the product!", "Successfully bought");
+							
+							// set new balance
+							label_balance = new JLabel("My balance: " + Connector.getLogisticsServiceInterface().getBalance(JLandingPane.getUs(), JLandingPane.getPass()));
 						} else {
 							// oops 
 							MessageBox.showError("You didn't bought the product! Check your saldo and try again.", "Unsuccessful bought!");
@@ -98,7 +101,7 @@ public class JProduct extends JPanel {
 		btnReload.setBounds(253, 244, 89, 23);
 		add(btnReload);
 		
-		label_balance = new JLabel("My balance: ");// + Connector.getLogisticsServiceInterface().getBalance());
+		label_balance = new JLabel("My balance: " + Connector.getLogisticsServiceInterface().getBalance(JLandingPane.getUs(), JLandingPane.getPass()));
 		label_balance.setBounds(10, 12, 165, 14);
 		add(label_balance);
 	}

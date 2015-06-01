@@ -33,7 +33,7 @@ public class JProduct extends JPanel {
 		model.clear();
 		
 		for (Product p : Connector.getProductServiceInterface().getAllProducts().getProduct()) {
-			model.addElement("ID: " + p.getId() + " || " + p.getName() + ", €" + p.getPrice() + ", Stock:" + p.getStock());
+			model.addElement("ID: " + p.getId() + " || " + p.getName() + ", ï¿½" + p.getPrice() + ", Stock:" + p.getStock());
 		}
 	}
 	
@@ -101,8 +101,5 @@ public class JProduct extends JPanel {
 		label_balance = new JLabel("My balance: ");// + Connector.getLogisticsServiceInterface().getBalance());
 		label_balance.setBounds(10, 12, 165, 14);
 		add(label_balance);
-		
-		
-		
 	}
 }

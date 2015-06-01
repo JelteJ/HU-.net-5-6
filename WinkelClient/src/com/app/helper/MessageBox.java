@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 
 public final class MessageBox {
 
-	static ImageIcon icon = null;
+	 static ImageIcon icon = null;
 	
 	 public static void showError(String message, String title) {
 		 // sound

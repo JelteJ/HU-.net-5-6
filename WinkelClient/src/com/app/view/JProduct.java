@@ -68,7 +68,7 @@ public class JProduct extends JPanel {
 					String[] details = selected.split(" ");
 					
 					try {
-						int productId = Integer.parseInt(details[0]);
+						int productId = Integer.parseInt(details[1]);
 						
 						// buy product
 						if (Connector.getLogisticsServiceInterface().buyProduct(productId, 1, JLandingPane.getUs(), JLandingPane.getPass())) {

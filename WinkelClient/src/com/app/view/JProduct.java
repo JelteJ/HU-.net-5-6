@@ -33,7 +33,7 @@ public class JProduct extends JPanel {
 		model.clear();
 		
 		for (Product p : Connector.getProductServiceInterface().getAllProducts().getProduct()) {
-			model.addElement("ID: " + p.getId() + " || " + p.getName() + ", €" + p.getPrice() + ", Stock:" + p.getStock());
+			model.addElement("ID: " + p.getId() + " || " + p.getName() + ", \u20ac" + p.getPrice() + ", Stock:" + p.getStock());
 		}
 	}
 	

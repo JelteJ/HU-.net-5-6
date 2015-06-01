@@ -39,7 +39,7 @@ public class JInventory extends JPanel {
 		// add products onload
 		for (BoughtProduct b : Connector.getLogisticsServiceInterface().getBoughtProducts(JLandingPane.getUs(), JLandingPane.getPass()).getBoughtProduct()) {
 			Product product = Connector.getProductServiceInterface().getProductById(b.getProductId());
-			model.addElement(product.getName() + ", €" + product.getPrice() + ", op " + b.getDateBought().getDay() + "-" + b.getDateBought().getMonth() + "-" + b.getDateBought().getYear());
+			model.addElement(product.getName() + ", \u20ac" + product.getPrice() + ", op " + b.getDateBought().getDay() + "-" + b.getDateBought().getMonth() + "-" + b.getDateBought().getYear());
 		}
 		
 		final JList<String> productList = new JList<String>(model);

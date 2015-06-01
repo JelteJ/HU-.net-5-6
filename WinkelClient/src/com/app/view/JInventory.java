@@ -39,7 +39,7 @@ public class JInventory extends JPanel {
 		// add products onload
 		for (BoughtProduct b : Connector.getLogisticsServiceInterface().getBoughtProducts(JLandingPane.getUs(), JLandingPane.getPass()).getBoughtProduct()) {
 			Product product = Connector.getProductServiceInterface().getProductById(b.getProductId());
-			model.addElement(product.getName() + ", €" + product.getPrice() + ", op " + b.getDateBought().getDay() + "-" + b.getDateBought().getMonth() + "-" + b.getDateBought().getYear());
+			model.addElement(product.getName() + ", â‚¬" + product.getPrice() + ", op " + b.getDateBought().getDay() + "-" + b.getDateBought().getMonth() + "-" + b.getDateBought().getYear());
 		}
 		
 		final JList<String> productList = new JList<String>(model);
@@ -49,7 +49,7 @@ public class JInventory extends JPanel {
 		productList.setBounds(13, 38, 329, 197);
 		add(productList);
 		
-		lblMonyLeft = new JLabel("Money left:");// + Connector.getLogisticsServiceInterface().getBalance());
+		lblMonyLeft = new JLabel("Money left: " + Connector.getLogisticsServiceInterface().getBalance(JLandingPane.getUs(), JLandingPane.getPass()));
 		lblMonyLeft.setBounds(10, 12, 165, 14);
 		add(lblMonyLeft);
 	}

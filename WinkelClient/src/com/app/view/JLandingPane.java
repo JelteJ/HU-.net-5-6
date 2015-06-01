@@ -89,12 +89,15 @@ public class JLandingPane {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setBackground(SystemColor.window);
+		frame.getContentPane().setBackground(SystemColor.window);
 		frame.setBounds(100, 100, 572, 301);
 		frame.setTitle("Winkel App");
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JDesktopPane desktopPane = new JDesktopPane();
+		desktopPane.setBackground(SystemColor.window);
 		frame.getContentPane().add(desktopPane, BorderLayout.CENTER);
 		
 		JDesktopPane desktopPanel = new JDesktopPane();
@@ -154,7 +157,7 @@ public class JLandingPane {
 			}
 		});
 		item_product.setRolloverEnabled(true);
-		item_product.setIcon(new ImageIcon(JLandingPane.class.getResource("/images/lock_icon.png")));
+		item_product.setIcon(null);
 		menuBar_products.add(item_product);
 		
 		JMenuBar menuBar_inventory = new JMenuBar();
@@ -172,11 +175,11 @@ public class JLandingPane {
 			}
 		});
 		item_inventory.setRolloverEnabled(true);
-		item_inventory.setIcon(new ImageIcon(JLandingPane.class.getResource("/images/lock_icon.png")));
+		item_inventory.setIcon(null);
 		menuBar_inventory.add(item_inventory);
 		
 		contentPanel = new JPanel();
-		contentPanel.setBackground(UIManager.getColor("Desktop.background"));
+		contentPanel.setBackground(SystemColor.window);
 		contentPanel.setBounds(220, 0, 352, 278);
 		desktopPane.add(contentPanel);
 		contentPanel.setLayout(new CardLayout(0, 0));
